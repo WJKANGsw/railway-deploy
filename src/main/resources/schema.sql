@@ -21,7 +21,7 @@ CREATE TABLE index_info
 CREATE TABLE sync_job
 (
     id            SERIAL                                NOT NULL PRIMARY KEY,
-    index_info_id SERIAL                                NOT NULL,
+    index_info_id BIGINT                                NOT NULL,
     job_type      VARCHAR(10)                           NOT NULL,
     target_date   DATE,
     worker        VARCHAR(15)                           NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE sync_job
 CREATE TABLE auto_sync
 (
     id                   SERIAL       NOT NULL PRIMARY KEY,
-    index_info_id        SERIAL       NOT NULL,
+    index_info_id        BIGINT       NOT NULL,
     index_classification VARCHAR(240) NOT NULL,
     index_name           VARCHAR(240) NOT NULL,
     enabled              BOOLEAN      NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE auto_sync
 CREATE TABLE index_data
 (
     id                  SERIAL       NOT NULL PRIMARY KEY,
-    index_info_id       SERIAL       NOT NULL,
+    index_info_id       BIGINT       NOT NULL,
     base_date           DATE         NOT NULL,
     source_type         VARCHAR(20)  NOT NULL,
     market_price        NUMERIC,

@@ -21,10 +21,10 @@ import lombok.NoArgsConstructor;
 @Entity
 public class IndexInfo extends BaseEntity {
 
-    @Column(name = "index_classification", length = 240, unique = true, nullable = false)
+    @Column(name = "index_classification", length = 240, nullable = false)
     private String indexClassification;
 
-    @Column(name = "index_name", length = 240, unique = true, nullable = false)
+    @Column(name = "index_name", length = 240, nullable = false)
     private String indexName;
 
     @Column(name = "employed_items_count", nullable = false)
