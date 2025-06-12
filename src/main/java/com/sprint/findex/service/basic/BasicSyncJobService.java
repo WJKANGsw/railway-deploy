@@ -331,7 +331,7 @@ public class BasicSyncJobService implements SyncJobService {
                 } else {
                     indexInfo = createNewIndexInfo(item);
                     allIndexInfo.add(indexInfo);
-                    IndexInfo savedInfo = indexInfoRepository.save(indexInfo);
+                    //IndexInfo savedInfo = indexInfoRepository.save(indexInfo);
                 }
 
                 SyncJob newSyncJob = createSyncJob(indexInfo, workerIp);
