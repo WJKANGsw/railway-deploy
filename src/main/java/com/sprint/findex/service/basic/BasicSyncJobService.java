@@ -303,7 +303,7 @@ public class BasicSyncJobService implements SyncJobService {
         List<ApiResponse.StockIndexItem> uniqueItems = new ArrayList<>();
 
         for (ApiResponse.StockIndexItem item : items) {
-            String key = item.getIndexClassification() + "|" + item.getIndexName();
+            String key = normalize(item.getIndexClassification()) + "|" + normalize(item.getIndexName());
             if (processedKeys.add(key)) {
                 uniqueItems.add(item);
             }
@@ -349,10 +349,17 @@ public class BasicSyncJobService implements SyncJobService {
 
         return syncJobs;
     }
+    private String normalize(String value) {
+        if (value == null) return "";
+        return value.trim().replaceAll("\\s+", " "); // 연속 공백 1칸으로
+    }
 
     private IndexInfo findExisting(ApiResponse.StockIndexItem item) {
         return indexInfoRepository
-            .findByIndexClassificationAndIndexName(item.getIndexClassification(), item.getIndexName())
+            .findByIndexClassificationAndIndexName(
+                normalize(item.getIndexClassification()),
+                normalize(item.getIndexName())
+            )
             .orElse(null);
     }
 
