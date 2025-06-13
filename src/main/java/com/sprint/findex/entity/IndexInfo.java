@@ -2,10 +2,12 @@ package com.sprint.findex.entity;
 
 import com.sprint.findex.dto.request.IndexInfoCreateCommand;
 import com.sprint.findex.entity.base.BaseEntity;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import java.math.BigDecimal;
@@ -42,6 +44,9 @@ public class IndexInfo extends BaseEntity {
 
     @Column(name = "favorite", nullable = false)
     private boolean favorite;
+
+    @OneToOne(mappedBy = "indexInfo", cascade = CascadeType.ALL, orphanRemoval = true)
+    private AutoSyncConfig autoSyncConfig;
 
     public IndexInfo(String indexClassification, String indexName, int employedItemsCount,
         LocalDate basePointInTime, BigDecimal baseIndex, SourceType sourceType, boolean favorite) {
