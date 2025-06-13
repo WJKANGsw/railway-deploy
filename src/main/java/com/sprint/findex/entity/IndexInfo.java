@@ -7,11 +7,14 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -47,6 +50,12 @@ public class IndexInfo extends BaseEntity {
 
     @OneToOne(mappedBy = "indexInfo", cascade = CascadeType.ALL, orphanRemoval = true)
     private AutoSyncConfig autoSyncConfig;
+
+    @OneToMany(mappedBy = "indexInfo", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<IndexData> indexDataList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "indexInfo", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SyncJob> syncJobs = new ArrayList<>();
 
     public IndexInfo(String indexClassification, String indexName, int employedItemsCount,
         LocalDate basePointInTime, BigDecimal baseIndex, SourceType sourceType, boolean favorite) {
